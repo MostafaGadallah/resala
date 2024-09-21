@@ -48,6 +48,7 @@ function updateTotal() {
     let next=Math.ceil(total/50)*50;
     let remainder = next - total;
     document.getElementById('remainder').innerText = remainder > 0 ? remainder : 0;
+    document.getElementById('nextc').innerText = next > 0 ? next : 0;
 }
 
 // زيادة الكمية
