@@ -6,81 +6,100 @@
 <title>متجر رساله</title>
 <style>
 body {
-font-family: Arial, sans-serif;
-text-align: center;
+    font-family: Arial, sans-serif;
+    text-align: center;
 }
 .item {
-display: inline-block;
-margin: 20px;
-text-align: center;
+    display: inline-block;
+    margin: 20px;
+    text-align: center;
 }
 img {
-width: 150px;
-height: 150px;
-cursor: pointer;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
 }
 .count {
-font-size: 18px;
-color: #333;
+    font-size: 18px;
+    color: #333;
 }
-        button {
-            margin: 10px;
-        }
+button {
+    margin: 10px;
+}
+/* تنسيق شريط التنقل */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+nav img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+nav h1 {
+    margin: 0;
+    font-size: 24px;
+}
 </style>
 </head>
 <body>
 
-<h1>مرحبا بكم في متجر رساله</h1>
-<h2>الإجمالي: <span id="total">0</span> جنيه</h2>
+<!-- شريط التنقل -->
+<nav>
+    <img src="https://via.placeholder.com/50" alt="Logo">
+    <h1>متجر رساله</h1>
+</nav>
 
+<h2>الإجمالي: <span id="total">0</span> جنيه</h2>
+<h3>المتبقي للوصول إلى 250 جنيه: <span id="remainder">250</span> جنيه</h3>
+
+<!-- عناصر المتجر -->
 <div class="item" data-price="25">
-<img src="pasta.jpg" alt="ماكورونا" id="macaroni">
-        <!--<p>ماكورونا - 25 جنيه</p>-->
-        <p>ماكورونا - <span id="price-macaroni">25</span> جنيه</p>
-<p>العدد: <span class="count" id="count-macaroni">0</span></p>
-        <button class="decrease" data-item="macaroni">-</button>
-        <button class="increase" data-item="macaroni">+</button>
+    <img src="pasta.jpg" alt="ماكورونا" id="macaroni">
+    <p>ماكورونا - <span id="price-macaroni">25</span> جنيه</p>
+    <p>العدد: <span class="count" id="count-macaroni">0</span></p>
+    <button class="decrease" data-item="macaroni">-</button>
+    <button class="increase" data-item="macaroni">+</button>
 </div>
 
 <div class="item" data-price="21">
-<img src="rice.jpg" alt="أرز" id="rice">
-        <!--<p>أرز - 21 جنيه</p>-->
-        <p>أرز - <span id="price-rice">21</span> جنيه</p>
-<p>العدد: <span class="count" id="count-rice">0</span></p>
-        <button class="decrease" data-item="rice">-</button>
-        <button class="increase" data-item="rice">+</button>
+    <img src="rice.jpg" alt="أرز" id="rice">
+    <p>أرز - <span id="price-rice">21</span> جنيه</p>
+    <p>العدد: <span class="count" id="count-rice">0</span></p>
+    <button class="decrease" data-item="rice">-</button>
+    <button class="increase" data-item="rice">+</button>
 </div>
 
 <div class="item" data-price="10">
-<img src="tomato.jpg" alt="طماطم" id="tomato">
-      <!--  <p>طماطم - 10 جنيه</p>-->
-        <p>طماطم - <span id="price-tomato">10</span> جنيه</p>
-<p>العدد: <span class="count" id="count-tomato">0</span></p>
-        <button class="decrease" data-item="tomato">-</button>
-        <button class="increase" data-item="tomato">+</button>
+    <img src="tomato.jpg" alt="طماطم" id="tomato">
+    <p>طماطم - <span id="price-tomato">10</span> جنيه</p>
+    <p>العدد: <span class="count" id="count-tomato">0</span></p>
+    <button class="decrease" data-item="tomato">-</button>
+    <button class="increase" data-item="tomato">+</button>
 </div>
 
 <div class="item" data-price="8">
-<img src="onion.jpg" alt="بصل" id="onion">
-      <!--  <p>بصل - 8 جنيه</p>-->
-        <p>بصل - <span id="price-onion">8</span> جنيه</p>
-<p>العدد: <span class="count" id="count-onion">0</span></p>
-        <button class="decrease" data-item="onion">-</button>
-        <button class="increase" data-item="onion">+</button>
+    <img src="onion.jpg" alt="بصل" id="onion">
+    <p>بصل - <span id="price-onion">8</span> جنيه</p>
+    <p>العدد: <span class="count" id="count-onion">0</span></p>
+    <button class="decrease" data-item="onion">-</button>
+    <button class="increase" data-item="onion">+</button>
 </div>
 
 <div class="item" data-price="15">
-<img src="potato.jpg" alt="بطاطس" id="potatoes">
-      <!--  <p>بطاطس - 15 جنيه</p>-->
-        <p>بطاطس - <span id="price-potatoes">15</span> جنيه</p>
-<p>العدد: <span class="count" id="count-potatoes">0</span></p>
-        <button class="decrease" data-item="potatoes">-</button>
-        <button class="increase" data-item="potatoes">+</button>
+    <img src="potato.jpg" alt="بطاطس" id="potatoes">
+    <p>بطاطس - <span id="price-potatoes">15</span> جنيه</p>
+    <p>العدد: <span class="count" id="count-potatoes">0</span></p>
+    <button class="decrease" data-item="potatoes">-</button>
+    <button class="increase" data-item="potatoes">+</button>
 </div>
 
-    <br>
-    <button id="reset">إعادة ضبط</button>
-    <button onclick="location.href='price.html'">تعديل الأسعار</button>
+<br>
+<button id="reset">إعادة ضبط</button>
+<button onclick="location.href='price.html'">تعديل الأسعار</button>
 
 <script src="app.js"></script>
 </body>
