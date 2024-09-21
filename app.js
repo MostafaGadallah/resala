@@ -43,6 +43,10 @@ function updateTotal() {
         total += price * count;
     });
     document.getElementById('total').innerText = total;
+
+    // حساب القيمة المتبقية للوصول إلى 250 جنيه
+    let remainder = 250 - total;
+    document.getElementById('remainder').innerText = remainder > 0 ? remainder : 0;
 }
 
 // زيادة الكمية
