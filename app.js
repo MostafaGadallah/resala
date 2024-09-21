@@ -1,62 +1,78 @@
-let totalElement = document.getElementById('total');
-let total = 0;
-let counts = {
-    macaroni: 0,
-    rice: 0,
-    tomato: 0,
-    onion: 0,
-    potatoes: 0
-};
-
-// Load prices from cookies or use default values
+// دالة للحصول على الكوكيز
 function getCookie(name) {
-    let cookies = document.cookie.split('; ');
-    for (let cookie of cookies) {
-        let [key, value] = cookie.split('=');
-        if (key === name) return value;
+    let nameEQ = name + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
 }
 
-document.querySelectorAll('.item').forEach(item => {
-    let itemId = item.querySelector('img').id;
-    let price = getCookie(`price-${itemId}`) || item.getAttribute('data-price');
-    document.getElementById(`price-${itemId}`).innerText = price;
-    item.setAttribute('data-price', price);
-});
+// تحميل الأسعار من الكوكيز
+window.onload = function() {
+    let macaroniPrice = getCookie('macaroniPrice') || 25;
+    let ricePrice = getCookie('ricePrice') || 21;
+    let tomatoPrice = getCookie('tomatoPrice') || 10;
+    let onionPrice = getCookie('onionPrice') || 8;
+    let potatoesPrice = getCookie('potatoesPrice') || 15;
 
+    // تحديث الأسعار في الصفحة
+    document.getElementById('price-macaroni').innerText = macaroniPrice;
+    document.getElementById('price-rice').innerText = ricePrice;
+    document.getElementById('price-tomato').innerText = tomatoPrice;
+    document.getElementById('price-onion').innerText = onionPrice;
+    document.getElementById('price-potatoes').innerText = potatoesPrice;
+
+    // تحديث السعر في كل عنصر (data-price)
+    document.querySelector('.item[data-price="25"]').setAttribute('data-price', macaroniPrice);
+    document.querySelector('.item[data-price="21"]').setAttribute('data-price', ricePrice);
+    document.querySelector('.item[data-price="10"]').setAttribute('data-price', tomatoPrice);
+    document.querySelector('.item[data-price="8"]').setAttribute('data-price', onionPrice);
+    document.querySelector('.item[data-price="15"]').setAttribute('data-price', potatoesPrice);
+
+    updateTotal();
+};
+
+// دالة لحساب الإجمالي وتحديثه
+function updateTotal() {
+    let total = 0;
+    document.querySelectorAll('.item').forEach(item => {
+        let price = parseFloat(item.getAttribute('data-price'));
+        let count = parseInt(item.querySelector('.count').innerText);
+        total += price * count;
+    });
+    document.getElementById('total').innerText = total;
+}
+
+// زيادة الكمية
 document.querySelectorAll('.increase').forEach(button => {
-    button.addEventListener('click', () => {
-        let itemId = button.getAttribute('data-item');
-        let price = parseInt(document.getElementById(`price-${itemId}`).innerText);
-        total += price;
-        totalElement.innerText = total;
-
-        counts[itemId]++;
-        document.getElementById(`count-${itemId}`).innerText = counts[itemId];
+    button.addEventListener('click', function() {
+        let item = this.getAttribute('data-item');
+        let countElement = document.getElementById(`count-${item}`);
+        let count = parseInt(countElement.innerText);
+        countElement.innerText = count + 1;
+        updateTotal();
     });
 });
 
+// تقليل الكمية
 document.querySelectorAll('.decrease').forEach(button => {
-    button.addEventListener('click', () => {
-        let itemId = button.getAttribute('data-item');
-        let price = parseInt(document.getElementById(`price-${itemId}`).innerText);
-        if (counts[itemId] > 0) {
-            total -= price;
-            if (total < 0) total = 0;
-            totalElement.innerText = total;
-
-            counts[itemId]--;
-            document.getElementById(`count-${itemId}`).innerText = counts[itemId];
+    button.addEventListener('click', function() {
+        let item = this.getAttribute('data-item');
+        let countElement = document.getElementById(`count-${item}`);
+        let count = parseInt(countElement.innerText);
+        if (count > 0) {
+            countElement.innerText = count - 1;
+            updateTotal();
         }
     });
 });
 
-document.getElementById('reset').addEventListener('click', () => {
-    total = 0;
-    totalElement.innerText = total;
-    for (let itemId in counts) {
-        counts[itemId] = 0;
-        document.getElementById(`count-${itemId}`).innerText = 0;
-    }
+// إعادة ضبط الكميات
+document.getElementById('reset').addEventListener('click', function() {
+    document.querySelectorAll('.count').forEach(countElement => {
+        countElement.innerText = 0;
+    });
+    updateTotal();
 });
