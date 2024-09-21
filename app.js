@@ -45,7 +45,7 @@ function updateTotal() {
     document.getElementById('total').innerText = total;
 
     // حساب القيمة المتبقية للوصول إلى 250 جنيه
-    let next=50%total;
+    let next=50%total+total;
     let remainder = 250 - total;
     document.getElementById('remainder').innerText = next > 0 ? next : 0;
 }
