@@ -3,80 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر رساله</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .item {
-            display: inline-block;
-            margin: 20px;
-            text-align: center;
-        }
-        img {
-            width: 150px;
-            height: 150px;
-            cursor: pointer;
-        }
-        .count {
-            font-size: 18px;
-            color: #333;
-        }
-        button {
-            margin: 10px;
-        }
-    </style>
+    <title>الصفحة الرئيسية</title>
 </head>
 <body>
 
-    <h1>مرحبا بكم في متجر رساله</h1>
-    <h2>الإجمالي: <span id="total">0</span> جنيه</h2>
+    <h1>الأسعار الحالية للمنتجات</h1>
 
-    <div class="item" data-price="25">
-        <img src="https://via.placeholder.com/150" alt="ماكورونا" id="macaroni">
-        <p>ماكورونا - <span id="price-macaroni">25</span> جنيه</p>
-        <p>العدد: <span class="count" id="count-macaroni">0</span></p>
-        <button class="decrease" data-item="macaroni">-</button>
-        <button class="increase" data-item="macaroni">+</button>
+    <div>
+        <p>ماكورونا: <span id="macaroni-price"></span> جنيه</p>
+        <p>أرز: <span id="rice-price"></span> جنيه</p>
+        <p>طماطم: <span id="tomato-price"></span> جنيه</p>
+        <p>بصل: <span id="onion-price"></span> جنيه</p>
+        <p>بطاطس: <span id="potatoes-price"></span> جنيه</p>
     </div>
 
-    <div class="item" data-price="21">
-        <img src="https://via.placeholder.com/150" alt="أرز" id="rice">
-        <p>أرز - <span id="price-rice">21</span> جنيه</p>
-        <p>العدد: <span class="count" id="count-rice">0</span></p>
-        <button class="decrease" data-item="rice">-</button>
-        <button class="increase" data-item="rice">+</button>
-    </div>
+    <script>
+        // دالة للحصول على الكوكيز
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
 
-    <div class="item" data-price="10">
-        <img src="https://via.placeholder.com/150" alt="طماطم" id="tomato">
-        <p>طماطم - <span id="price-tomato">10</span> جنيه</p>
-        <p>العدد: <span class="count" id="count-tomato">0</span></p>
-        <button class="decrease" data-item="tomato">-</button>
-        <button class="increase" data-item="tomato">+</button>
-    </div>
+        // تحميل الأسعار من الكوكيز
+        window.onload = function() {
+            let macaroniPrice = getCookie('macaroniPrice');
+            let ricePrice = getCookie('ricePrice');
+            let tomatoPrice = getCookie('tomatoPrice');
+            let onionPrice = getCookie('onionPrice');
+            let potatoesPrice = getCookie('potatoesPrice');
 
-    <div class="item" data-price="8">
-        <img src="https://via.placeholder.com/150" alt="بصل" id="onion">
-        <p>بصل - <span id="price-onion">8</span> جنيه</p>
-        <p>العدد: <span class="count" id="count-onion">0</span></p>
-        <button class="decrease" data-item="onion">-</button>
-        <button class="increase" data-item="onion">+</button>
-    </div>
+            if (macaroniPrice) document.getElementById('macaroni-price').innerText = macaroniPrice;
+            if (ricePrice) document.getElementById('rice-price').innerText = ricePrice;
+            if (tomatoPrice) document.getElementById('tomato-price').innerText = tomatoPrice;
+            if (onionPrice) document.getElementById('onion-price').innerText = onionPrice;
+            if (potatoesPrice) document.getElementById('potatoes-price').innerText = potatoesPrice;
+        };
+    </script>
 
-    <div class="item" data-price="15">
-        <img src="https://via.placeholder.com/150" alt="بطاطس" id="potatoes">
-        <p>بطاطس - <span id="price-potatoes">15</span> جنيه</p>
-        <p>العدد: <span class="count" id="count-potatoes">0</span></p>
-        <button class="decrease" data-item="potatoes">-</button>
-        <button class="increase" data-item="potatoes">+</button>
-    </div>
-
-    <br>
-    <button id="reset">إعادة ضبط</button>
-    <button onclick="location.href='price.html'">تعديل الأسعار</button>
-
-    <script src="app.js"></script>
 </body>
 </html>
