@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعديل الأسعار</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .item {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+        }
+        button {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>تعديل أسعار المنتجات</h1>
+
+    <div class="item">
+        <label for="price-macaroni">ماكورونا</label>
+        <input type="number" id="price-macaroni" value="25">
+    </div>
+
+    <div class="item">
+        <label for="price-rice">أرز</label>
+        <input type="number" id="price-rice" value="21">
+    </div>
+
+    <div class="item">
+        <label for="price-tomato">طماطم</label>
+        <input type="number" id="price-tomato" value="10">
+    </div>
+
+    <div class="item">
+        <label for="price-onion">بصل</label>
+        <input type="number" id="price-onion" value="8">
+    </div>
+
+    <div class="item">
+        <label for="price-potatoes">بطاطس</label>
+        <input type="number" id="price-potatoes" value="15">
+    </div>
+
+    <br>
+    <button id="save">حفظ الأسعار</button>
+    <button onclick="location.href='index.html'">عودة للصفحة الرئيسية</button>
+
+    <script src="price.js"></script>
+</body>
+</html>
