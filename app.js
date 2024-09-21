@@ -1,7 +1,5 @@
 let totalElement = document.getElementById('total');
 let total = 0;
-
-// إنشاء كائن لتتبع عدد كل عنصر
 let counts = {
     macaroni: 0,
     rice: 0,
@@ -10,39 +8,55 @@ let counts = {
     potatoes: 0
 };
 
-document.querySelectorAll('.item img').forEach(img => {
-    let timer;
+// Load prices from cookies or use default values
+function getCookie(name) {
+    let cookies = document.cookie.split('; ');
+    for (let cookie of cookies) {
+        let [key, value] = cookie.split('=');
+        if (key === name) return value;
+    }
+    return null;
+}
 
-    // On click, increase the price and update count
-    img.addEventListener('click', () => {
-        let price = parseInt(img.parentElement.getAttribute('data-price'));
+document.querySelectorAll('.item').forEach(item => {
+    let itemId = item.querySelector('img').id;
+    let price = getCookie(`price-${itemId}`) || item.getAttribute('data-price');
+    document.getElementById(`price-${itemId}`).innerText = price;
+    item.setAttribute('data-price', price);
+});
+
+document.querySelectorAll('.increase').forEach(button => {
+    button.addEventListener('click', () => {
+        let itemId = button.getAttribute('data-item');
+        let price = parseInt(document.getElementById(`price-${itemId}`).innerText);
         total += price;
         totalElement.innerText = total;
 
-        // تحديث العداد
-        let itemId = img.id;
         counts[itemId]++;
         document.getElementById(`count-${itemId}`).innerText = counts[itemId];
     });
+});
 
-    // On long press, decrease the amount and update count
-    img.addEventListener('mousedown', () => {
-        timer = setTimeout(() => {
-            let price = parseInt(img.parentElement.getAttribute('data-price'));
+document.querySelectorAll('.decrease').forEach(button => {
+    button.addEventListener('click', () => {
+        let itemId = button.getAttribute('data-item');
+        let price = parseInt(document.getElementById(`price-${itemId}`).innerText);
+        if (counts[itemId] > 0) {
             total -= price;
             if (total < 0) total = 0;
             totalElement.innerText = total;
 
-            // تحديث العداد في حالة النقص
-            let itemId = img.id;
-            if (counts[itemId] > 0) {
-                counts[itemId]--;
-                document.getElementById(`count-${itemId}`).innerText = counts[itemId];
-            }
-        }, 1000); // 1 second press to decrease
+            counts[itemId]--;
+            document.getElementById(`count-${itemId}`).innerText = counts[itemId];
+        }
     });
+});
 
-    img.addEventListener('mouseup', () => {
-        clearTimeout(timer);
-    });
+document.getElementById('reset').addEventListener('click', () => {
+    total = 0;
+    totalElement.innerText = total;
+    for (let itemId in counts) {
+        counts[itemId] = 0;
+        document.getElementById(`count-${itemId}`).innerText = 0;
+    }
 });
